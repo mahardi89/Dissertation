@@ -2,12 +2,16 @@ source("R/functions.R")
 library(tmap)
 tmap_mode("view")
 
+#settings
+location = "Leeds"
+year = 2018
+
 # Get OSM Data
-osm_leeds = download_osm("Leeds, UK")
-saveRDS(osm_leeds, "data/osm_leeds_raw.Rds")
+osm = download_osm(paste0(location,", UK"))
+saveRDS(osm, paste0("data/osm_",location,"_raw.Rds"))
 
 # Get Traffic Counts
-traffic_leeds_2018 = prepare_traffic_data("data/dft_aadf_local_authority_id_63.csv", year = 2018)
+traffic_leeds_2018 = prepare_traffic_data("data/dft_aadf_local_authority_id_63.csv", year = year)
 saveRDS(traffic_leeds_2018, "data/traffic_leeds_2018.Rds")
 
 # Make a boundary around the traffic data
